@@ -4,7 +4,6 @@ on:
   push:
     branches: [ "main" ]
 
-# CRITICAL FOR CD: Grants the pipeline permission to write to GitHub Packages
 permissions:
   contents: read
   packages: write
@@ -28,13 +27,17 @@ jobs:
     - name: Build and Test with Maven
       run: ./mvnw clean package
 
+    # NEW STEP: Convert the repository name to lowercase for Docker compatibility
+    - name: Prepare Naming Constraints
+      run: |
+        echo "REPO_LOWERCASE=${GITHUB_REPOSITORY,,}" >> $GITHUB_ENV
+
     # === CONTINUOUS DELIVERY / DEPLOYMENT (CD) ===
     - name: Log in to GitHub Container Registry
       uses: docker/login-action@v3
       with:
         registry: ghcr.io
         username: ${{ github.actor }}
-        # GitHub automatically generates this token for security
         password: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Build and Push Docker Image
@@ -42,7 +45,7 @@ jobs:
       with:
         context: .
         push: true
-        # Dynamically tags the image with 'latest' and the unique Git commit SHA
+        # Updated to use the lowercase environment variable instead
         tags: |
-          ghcr.io/${{ github.repository }}:latest
-          ghcr.io/${{ github.repository }}:${{ github.sha }}
+          ghcr.io/${{ env.REPO_LOWERCASE }}:latest
+          ghcr.io/${{ env.REPO_LOWERCASE }}:${{ github.sha }}
