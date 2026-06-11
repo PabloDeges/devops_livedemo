@@ -23,16 +23,16 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    # === CONTINUOUS INTEGRATION (CI) ===
+    # CONTINUOUS INTEGRATION (CI)
     - name: Build and Test with Maven
       run: ./mvnw clean package
 
-    # NEW STEP: Convert the repository name to lowercase for Docker compatibility
+    # convert to lowercase...
     - name: Prepare Naming Constraints
       run: |
         echo "REPO_LOWERCASE=${GITHUB_REPOSITORY,,}" >> $GITHUB_ENV
 
-    # === CONTINUOUS DELIVERY / DEPLOYMENT (CD) ===
+    # CONTINUOUS DELIVERY / DEPLOYMENT (CD)
     - name: Log in to GitHub Container Registry
       uses: docker/login-action@v3
       with:
@@ -45,7 +45,6 @@ jobs:
       with:
         context: .
         push: true
-        # Updated to use the lowercase environment variable instead
         tags: |
           ghcr.io/${{ env.REPO_LOWERCASE }}:latest
           ghcr.io/${{ env.REPO_LOWERCASE }}:${{ github.sha }}
