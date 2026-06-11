@@ -5,4 +5,5 @@ chmod +x mvnw
 
 ./mvnw spring-boot:run
 
-git push -u origin main
+./mvnw test
+
