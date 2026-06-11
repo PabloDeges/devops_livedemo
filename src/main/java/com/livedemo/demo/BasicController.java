@@ -26,7 +26,8 @@ public class BasicController {
                     <ul style="text-align: left; color: black; font-size: 1.4rem; list-style: none; padding: 0; margin: 0; line-height: 2.2;">
                         <li style="text-color: black;"> Hier stehen ganz wichtige Sachen </li>
                         <li style="text-color: black;">Wird der Sourcecode geändert, wird die GitHub Action getriggert</li>
-                        <li style="text-color: black;">Tippfehler hier: Ageiles Projektmanagement ist gut</li>
+                        <li style="text-color: black;">Tippfehler hier: Agiles Projektmanagement ist gut</li>
+                        <li style="text-color: black;">...</li>
                     </ul>
                     
                 </div>
