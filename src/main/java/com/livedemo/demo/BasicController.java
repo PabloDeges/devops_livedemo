@@ -27,7 +27,7 @@ public class BasicController {
                         <li style="text-color: black;"> Hier stehen ganz wichtige Sachen </li>
                         <li style="text-color: black;">Wird der Sourcecode geändert, wird die GitHub Action getriggert</li>
                         <li style="text-color: black;">Tippfehler hier: Ageiles Projektmanagement ist gut</li>
-                        <li style="text-color: black;">...</li>
+                        <li style="text-color: black;">DevOps macht spass</li>
                     </ul>
                     
                 </div>
